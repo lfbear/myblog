@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lfbear.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="这里讲述一个O2O的真实案例，虽然我对O2O也深感兴趣，但理智最终总会占据上峰。 一个O2O家政类服务，名字就不提了，这里暂且成为AppX。第一次知道AppX的时候，是一次跟朋友聊O2O方面的一些事情了解的，感觉是对线下传统家政行业的一个颠覆，也是由此，我第一次使用了这个AppX。我的使用场景是叫一个小时工打扫卫生。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="来自一个O2O产品的笑话">
+<meta property="og:url" content="https://lfbear.com/2015/04/27/2015-04-27-lai-zi-yi-ge-o2o-chan-pin-de-xiao-hua/index.html">
+<meta property="og:site_name" content="小飞熊的窝">
+<meta property="og:description" content="这里讲述一个O2O的真实案例，虽然我对O2O也深感兴趣，但理智最终总会占据上峰。 一个O2O家政类服务，名字就不提了，这里暂且成为AppX。第一次知道AppX的时候，是一次跟朋友聊O2O方面的一些事情了解的，感觉是对线下传统家政行业的一个颠覆，也是由此，我第一次使用了这个AppX。我的使用场景是叫一个小时工打扫卫生。">
+<meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2015-04-27T02:53:57.000Z">
+<meta property="article:modified_time" content="2020-03-15T13:18:02.746Z">
+<meta property="article:author" content="小飞熊">
+<meta property="article:tag" content="小飞熊">
+<meta property="article:tag" content=" 个人日志">
+<meta property="article:tag" content=" blog">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lfbear.com/2015/04/27/2015-04-27-lai-zi-yi-ge-o2o-chan-pin-de-xiao-hua/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>来自一个O2O产品的笑话 | 小飞熊的窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小飞熊的窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Be myself, be happy</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://lfbear.com/2015/04/27/2015-04-27-lai-zi-yi-ge-o2o-chan-pin-de-xiao-hua/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小飞熊">
+      <meta itemprop="description" content="真自己，真快乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小飞熊的窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          来自一个O2O产品的笑话
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-04-27 10:53:57" itemprop="dateCreated datePublished" datetime="2015-04-27T10:53:57+08:00">2015-04-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-15 21:18:02" itemprop="dateModified" datetime="2020-03-15T21:18:02+08:00">2020-03-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%87%AA%E8%A8%80%E8%87%AA%E8%AF%AD/" itemprop="url" rel="index"><span itemprop="name">自言自语</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这里讲述一个O2O的真实案例，虽然我对O2O也深感兴趣，但理智最终总会占据上峰。</p>
+<p>一个O2O家政类服务，名字就不提了，这里暂且成为AppX。第一次知道AppX的时候，是一次跟朋友聊O2O方面的一些事情了解的，感觉是对线下传统家政行业的一个颠覆，也是由此，我第一次使用了这个AppX。我的使用场景是叫一个小时工打扫卫生。</p>
+<a id="more"></a>
+<p>注册，登录，然后填写地址信息，系统给我推荐了几名小时工，我选择了一位评价比较好的，约上了。由于是非工作时段，订单下好后并没有提示什么，次日上午，接到电话，说是客服确认订单，跟我核对一遍订单信息后，说了关键的一句，如果预约的这名小时工时间不便，可否换成其他人，我也没多想，就同意了。</p>
+<p>结果正应了这个电话，原来预约的小时工被替换了，订单信息发生变更，期初没觉得怎么不妥，无意当中点入到小时工的评价中，看到了好多负面评价。然后第一感觉是不靠谱，我先后2次电话客服，说明我的疑虑，并且我特意说道&ldquo;我是第一次使用这个AppX，我想获得一个比较好的体验，以便以后可以再次使用&rdquo;，但是最终迟到的客服回馈告诉我，要么用这个小时工，要么取消订单。我一下子无语了，因为我本身也做过O2O的项目，出现这种情景，应该是O2O所有团队都不愿看到的。但是，那么 意外，他就发生了。</p>
+<p>最后把这个事情将给朋友，朋友笑喷了。反过来想想，的确有意思。你开了家店，热心的把握迎进来，然后说有各种好吃的食物，结果点什么都没有，最后还告诉我只省最难吃的XXX，好评很差，问我吃不吃？</p>
+<p>说几点从我个人经历感觉到的问题：</p>
+<p>1、你准备好了么？</p>
+<p>其实这个问题不该问，因为现在的创业者都是先用各种言辞说服投资人，然后再做事情，更况且有些人做出来的的并不是之前想的。显然，AppX并没有准备好接待他的顾客，因为店里的好吃的都卖光了。</p>
+<p>2、互联网产品出身的人天生不适合做O2O</p>
+<p>可能有人会说我的话太偏激，但是至少我的阅历告诉我，互联网产品出生的人大多情况都在创造伪需求，教育用户。因为互联网本身是没有任何价值可言的，所以互联网产品出身的人，通常都在想尽一切办法把用户搞进来，然后再教给用户怎么玩。而O2O是利用互联网这个工具，将传统行业进行提速。其本质是传统行业的互联网渠道营销。主要就表现为：您将点一份好评率很低的食物，请问是否要吃？既然互联网是低成本，高效率的工具，我为什么要吃这个，我大可还一家嘛~</p>
+<p>3、一切泡沫最终都将消失</p>
+<p>虽然现在仍在有人打着各种投资商喜欢的旗号骗吃骗喝，但已然变成了少数。越是高效的工具，越会快速的淘汰逐末，只是最终总是要有人为这个买单，投资商么？是的，但是他们不差钱。其实损失最大的时用户群的再次使用可能。国人骗来骗去太多了，所以大众很快就得到了免疫，信用危机不是一时能够解决的，但是最终肯定是损害了这个行业的用户信心。</p>
+<p>我不否认靠搞钱生存的行业和现状，该死的华尔街教给了大家这个，没办法。但是一切不从实际出发的，不踏实的，建立在伪需求之上的产品都应该快速的被淘汰。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2014/05/03/2014-05-04-mu-lu-zi-dong-tong-bu-gong-ju/" rel="prev" title="目录自动同步工具">
+      <i class="fa fa-chevron-left"></i> 目录自动同步工具
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2015/10/20/2015-10-20-scribe-an-zhuang-ji-lu/" rel="next" title="scribe 安装记录">
+      scribe 安装记录 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小飞熊"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">小飞熊</p>
+  <div class="site-description" itemprop="description">真自己，真快乐</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lfbear" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lfbear" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2005 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-star"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小飞熊的窝 - 一头程序员的成长记录</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a>
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

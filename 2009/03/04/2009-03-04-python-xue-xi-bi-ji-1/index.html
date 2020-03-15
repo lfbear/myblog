@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lfbear.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="入门课程 主要记录python的数据类型和基本函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python学习笔记-1">
+<meta property="og:url" content="https://lfbear.com/2009/03/04/2009-03-04-python-xue-xi-bi-ji-1/index.html">
+<meta property="og:site_name" content="小飞熊的窝">
+<meta property="og:description" content="入门课程 主要记录python的数据类型和基本函数">
+<meta property="og:locale" content="zh">
+<meta property="article:published_time" content="2009-03-04T01:14:44.000Z">
+<meta property="article:modified_time" content="2020-03-15T13:18:02.746Z">
+<meta property="article:author" content="小飞熊">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="学习笔记">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lfbear.com/2009/03/04/2009-03-04-python-xue-xi-bi-ji-1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true
+  };
+</script>
+
+  <title>python学习笔记-1 | 小飞熊的窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小飞熊的窝</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">Be myself, be happy</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://lfbear.com/2009/03/04/2009-03-04-python-xue-xi-bi-ji-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小飞熊">
+      <meta itemprop="description" content="真自己，真快乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小飞熊的窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python学习笔记-1
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2009-03-04 09:14:44" itemprop="dateCreated datePublished" datetime="2009-03-04T09:14:44+08:00">2009-03-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-03-15 21:18:02" itemprop="dateModified" datetime="2020-03-15T21:18:02+08:00">2020-03-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E4%BD%9C%E5%BF%83%E8%AF%AD/" itemprop="url" rel="index"><span itemprop="name">工作心语</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>入门课程 主要记录python的数据类型和基本函数</p>
+<p><a id="more"></a></p>
+<p>1.数据类型</p>
+<p>--------------------</p>
+<p>a.字典 Dictionary</p>
+<p>$定义</p>
+<p>d = {key1:value1,key2:value2....} 定义时使用{} key与value之间用:分隔，每一个元素都是一个 key-value 对，多个元素用,分隔。</p>
+<p>$约束</p>
+<p>key是唯一的(大小写敏感)，为已有key复制将覆盖原值；<br />
+字典中的元素是无序的；<br />
+字典中元素的值可以是任意数据类型。</p>
+<p>$操作</p>
+<p>赋值</p>
+<p>d['newkey'] = newvalue</p>
+<p>删除单个元素</p>
+<p>del d['newkey']</p>
+<p>清空字典</p>
+<p>d.clear()</p>
+<p>-----</p>
+<p>b.列表 List</p>
+<p>$定义(可理解为数组)</p>
+<p>l = [a,b,c....] 定义时使用[] 每个元素用,分隔。</p>
+<p>$约束</p>
+<p>元素是有序的<br />
+非空List第一个元素为l[0] 一个含有n个元素的List 最后一个元素为l[n-1] 或 l[-1]；<br />
+List允许索引为负值 负值是从尾部向前计数来取元素；<br />
+List中元素的值可以是任意数据类型。</p>
+<p>$分片</p>
+<p>指定2个索引值来得到List的子集，l[0:3] 返回 list 的前 3 个元素 : 前后索引均可省略，分别默认为0 和 -1。</p>
+<p>$操作</p>
+<p>增加</p>
+<p>l.append('new') 向list尾部增加一个元素。</p>
+<p>l.insert(1,'new') 指定索引增加一个元素，该元素后面的元素索引会自动向后移动一个位置。</p>
+<p>l.extend(["two", "elements"]) 连接2个List，注意extend的参数为list，新元素会在尾部。</p>
+<p>搜索</p>
+<p>l.index('a') 在 list 中查找一个值的首次出现并返回索引值，如果在 list 中没有找到值，Python 会引发一个异常。</p>
+<p>'a' in l 要测试一个值是否在 list 内，使用 in。如果值存在，它返回 True，否则返为 False 。</p>
+<p>删除</p>
+<p>l.remove('a') 删除首次出现的值</p>
+<p>l.pop() 删除最末尾的元素，并返回。</p>
+<p>List 运算</p>
+<p>+ 运算符连接起来相当于extend，但大型list使用extend会快一些<br />
+* 运算符 相当于将原来的list重复作用于新的list</p>
+<p>-----</p>
+<p>c.元组 Tuple 即为不可更改的List</p>
+<p>$定义</p>
+<p>t = ('a','b','c') 定义时使用() 每个元素用,分隔。</p>
+<p>$约束</p>
+<p>Tuple 不能使用增、删、查操作</p>
+<p>$好处</p>
+<p>Tuple 使用比List 快，适合存放常量<br />
+安全，可以转换为List，反之不可以<br />
+可以作为字典的key，List则不可以，以为List可变<br />
+Tuples 可以用在字符串格式化中</p>
+<p>--------------------<br />
+2.函数定义</p>
+<p>def function(parameter1,parameter2,...):<br />
+函数体需要缩进</p>
+<p>$一些有用的函数</p>
+<p>type 函数：返回任意对象的数据类型。<br />
+str 函数：将数据强制转换为字符串。<br />
+dir 函数：查看对象可进行的操作。<br />
+callable 函数：对象是否可以调用。<br />
+getattr 函数：获取对象引用，可用于分发，自省的核心。</p>
+<p>$其他知识</p>
+<p>python的内置函数在 __builtin__ 模块中</p>
+<p>学习教程：dive into python 一本很好的书</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="tag"># 学习笔记</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2009/03/03/2009-03-03-zui-e-de-dai-ma-xu-3/" rel="prev" title="罪恶的代码-续3">
+      <i class="fa fa-chevron-left"></i> 罪恶的代码-续3
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2009/04/22/2009-04-23-ling-yi-de-ye-mian-wu-fa-xian-shi/" rel="next" title="灵异的&ldquo;页面无法显示&rdquo;">
+      灵异的&ldquo;页面无法显示&rdquo; <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小飞熊"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">小飞熊</p>
+  <div class="site-description" itemprop="description">真自己，真快乐</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">91</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lfbear" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lfbear" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 2005 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-star"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小飞熊的窝 - 一头程序员的成长记录</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a>
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

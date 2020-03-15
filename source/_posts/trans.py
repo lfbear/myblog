@@ -1,5 +1,8 @@
 #/usr/bin/python
 # -*- coding: UTF-8 -*-
+# 转换工具
+# 将中文命名的post改为拼音命名
+# 对修改后的文件进行mtime修复
 
 import os
 import time
@@ -23,9 +26,15 @@ def cb(x):
     else:
         return None
 
-files= os.listdir(os.getcwd()) #得到文件夹下的所有文件名称
-for file in files: #遍历文件夹
-     if not os.path.isdir(file): #判断是否是文件夹，不是文件夹才打开
+files = os.listdir(os.getcwd())
+for file in files:
+     if not os.path.isdir(file):
+        if file[:1] == "2":
+            format = "%Y-%m-%d %H:%M:%S"  #指定时间格式
+            modified_time = file[:10] + ' 00:00:00'
+            print(file, "modified time:",modified_time)
+            mtime_t = time.mktime(time.strptime(modified_time, format))
+            os.utime(file, (mtime_t,mtime_t)) #修改访问时间和修改时间
 
         if file[-5:] == ".html":
             #print(time.ctime(os.path.getmtime(file)))
@@ -37,15 +46,3 @@ for file in files: #遍历文件夹
                 last_title = "-".join(pinyin)
             os.rename(file,file[:11]+last_title+'.md')
             print(file[:11]+last_title+'.md')
-
-        if file[:1] == "2":
-            #指定时间格式
-            format = "%Y-%m-%d %H:%M:%S"
-
-            Modified_time = file[:10] + ' 00:00:00'
-            print('Modified_time:',Modified_time)
-        
-            #创建struct_time对象
-            mtime_t = time.mktime(time.strptime(Modified_time, format))
-            os.utime(file, (mtime_t,mtime_t))
-            #修改访问时间和修改时间

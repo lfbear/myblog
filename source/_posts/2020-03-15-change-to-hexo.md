@@ -1,11 +1,12 @@
 ---
 title: change to hexo
-date: 2020-03-15 21:41:52
-tags: 
+tags:
   - hexo
   - blog
 categories:
   - 自言自语
+abbrlink: 50111
+date: 2020-03-15 21:41:52
 ---
 blog一年多没更新了，其实19年经历了很多，有很多感悟。可每每当提笔的时候，jekyll的确不是很好用，所以就一直搁置了。
 

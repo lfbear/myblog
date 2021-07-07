@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"lfbear.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"lfbear.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="这里讲述一个O2O的真实案例，虽然我对O2O也深感兴趣，但理智最终总会占据上峰。 一个O2O家政类服务，名字就不提了，这里暂且成为AppX。第一次知道AppX的时候，是一次跟朋友聊O2O方面的一些事情了解的，感觉是对线下传统家政行业的一个颠覆，也是由此，我第一次使用了这个AppX。我的使用场景是叫一个小时工打扫卫生。">
@@ -26,13 +26,11 @@
 <meta property="og:url" content="https://lfbear.com/2015/04/27/2015-04-27-lai-zi-yi-ge-o2o-chan-pin-de-xiao-hua/index.html">
 <meta property="og:site_name" content="小飞熊的窝">
 <meta property="og:description" content="这里讲述一个O2O的真实案例，虽然我对O2O也深感兴趣，但理智最终总会占据上峰。 一个O2O家政类服务，名字就不提了，这里暂且成为AppX。第一次知道AppX的时候，是一次跟朋友聊O2O方面的一些事情了解的，感觉是对线下传统家政行业的一个颠覆，也是由此，我第一次使用了这个AppX。我的使用场景是叫一个小时工打扫卫生。">
-<meta property="og:locale" content="zh">
+<meta property="og:locale">
 <meta property="article:published_time" content="2015-04-27T02:53:57.000Z">
-<meta property="article:modified_time" content="2021-05-12T06:25:48.333Z">
+<meta property="article:modified_time" content="2021-07-07T09:39:34.697Z">
 <meta property="article:author" content="小飞熊">
-<meta property="article:tag" content="小飞熊">
-<meta property="article:tag" content=" 个人日志">
-<meta property="article:tag" content=" blog">
+<meta property="article:tag" content="小飞熊, 个人日志, blog">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="https://lfbear.com/2015/04/27/2015-04-27-lai-zi-yi-ge-o2o-chan-pin-de-xiao-hua/">
@@ -43,7 +41,8 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true
+    isPost : true,
+    lang   : 'zh'
   };
 </script>
 
@@ -96,14 +95,12 @@
 
   <div class="site-meta">
 
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">小飞熊的窝</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">Be myself, be happy</p>
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">小飞熊的窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Be myself, be happy</p>
   </div>
 
   <div class="site-nav-right">
@@ -113,8 +110,9 @@
 </div>
 
 
+
+
 <nav class="site-nav">
-  
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
 
@@ -142,8 +140,11 @@
 
   </li>
   </ul>
-
 </nav>
+
+
+
+
 </div>
     </header>
 
@@ -159,14 +160,13 @@
         <div class="content-wrap">
           
 
-          <div class="content">
+          <div class="content post posts-expand">
             
 
-  <div class="posts-expand">
-      
+    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
     <link itemprop="mainEntityOfPage" href="https://lfbear.com/2015/04/27/2015-04-27-lai-zi-yi-ge-o2o-chan-pin-de-xiao-hua/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -197,7 +197,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-12 14:25:48" itemprop="dateModified" datetime="2021-05-12T14:25:48+08:00">2021-05-12</time>
+                <time title="Modified: 2021-07-07 17:39:34" itemprop="dateModified" datetime="2021-07-07T17:39:34+08:00">2021-07-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -222,7 +222,7 @@
       
         <p>这里讲述一个O2O的真实案例，虽然我对O2O也深感兴趣，但理智最终总会占据上峰。</p>
 <p>一个O2O家政类服务，名字就不提了，这里暂且成为AppX。第一次知道AppX的时候，是一次跟朋友聊O2O方面的一些事情了解的，感觉是对线下传统家政行业的一个颠覆，也是由此，我第一次使用了这个AppX。我的使用场景是叫一个小时工打扫卫生。</p>
-<a id="more"></a>
+<span id="more"></span>
 <p>注册，登录，然后填写地址信息，系统给我推荐了几名小时工，我选择了一位评价比较好的，约上了。由于是非工作时段，订单下好后并没有提示什么，次日上午，接到电话，说是客服确认订单，跟我核对一遍订单信息后，说了关键的一句，如果预约的这名小时工时间不便，可否换成其他人，我也没多想，就同意了。</p>
 <p>结果正应了这个电话，原来预约的小时工被替换了，订单信息发生变更，期初没觉得怎么不妥，无意当中点入到小时工的评价中，看到了好多负面评价。然后第一感觉是不靠谱，我先后2次电话客服，说明我的疑虑，并且我特意说道&ldquo;我是第一次使用这个AppX，我想获得一个比较好的体验，以便以后可以再次使用&rdquo;，但是最终迟到的客服回馈告诉我，要么用这个小时工，要么取消订单。我一下子无语了，因为我本身也做过O2O的项目，出现这种情景，应该是O2O所有团队都不愿看到的。但是，那么 意外，他就发生了。</p>
 <p>最后把这个事情将给朋友，朋友笑喷了。反过来想想，的确有意思。你开了家店，热心的把握迎进来，然后说有各种好吃的食物，结果点什么都没有，最后还告诉我只省最难吃的XXX，好评很差，问我吃不吃？</p>
@@ -264,11 +264,11 @@
   
   
 
-  </div>
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -330,7 +330,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -343,7 +343,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">90</span>
+        <span class="site-state-item-count">97</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -370,6 +370,8 @@
       <div class="footer-inner">
         
 
+        
+
 <div class="copyright">
   
   &copy; 2005 – 
@@ -379,10 +381,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">小飞熊的窝 - 一头程序员的成长记录</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a>
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
   </div>
 
         
@@ -435,6 +434,26 @@
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '7b757d85c9dc912b18d5',
+      clientSecret: '3056c1a6f4fd569a8206d73209a04c05483ad8e3',
+      repo        : 'https://github.com/lfbear/myblog',
+      owner       : 'lfbear',
+      admin       : ['lfbear'],
+      id          : '5fd5e3e0855020195532e6b26fd6c87d',
+        language: 'en | zh-CN | zh-TW',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

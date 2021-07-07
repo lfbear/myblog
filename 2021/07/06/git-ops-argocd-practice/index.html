@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lfbear.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="背景本文旨在通过基于GitLab+ArgoCD的案例来介绍GitOps的一种可行的实践方案。这个案例可以满足对轻量，快速的容器部署需求。如果你部署在K8s中的项目正在寻找一个轻量快捷的部署方式，相信GitOps是一个很好的选择。一般来说，我们的代码都交由GitLab等CVS工具管理，近些年随着GitLab对CI的支持越来越友好，GitOps得以更加容易的落地。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GitOps之ArgoCD实践">
+<meta property="og:url" content="https://lfbear.com/2021/07/06/git-ops-argocd-practice/index.html">
+<meta property="og:site_name" content="小飞熊的窝">
+<meta property="og:description" content="背景本文旨在通过基于GitLab+ArgoCD的案例来介绍GitOps的一种可行的实践方案。这个案例可以满足对轻量，快速的容器部署需求。如果你部署在K8s中的项目正在寻找一个轻量快捷的部署方式，相信GitOps是一个很好的选择。一般来说，我们的代码都交由GitLab等CVS工具管理，近些年随着GitLab对CI的支持越来越友好，GitOps得以更加容易的落地。">
+<meta property="og:locale">
+<meta property="og:image" content="https://lfbear.com/assets/images/gitops-argocd.png">
+<meta property="article:published_time" content="2021-07-06T07:48:58.000Z">
+<meta property="article:modified_time" content="2021-07-07T09:39:34.701Z">
+<meta property="article:author" content="小飞熊">
+<meta property="article:tag" content="GitLab">
+<meta property="article:tag" content="CI">
+<meta property="article:tag" content="CD">
+<meta property="article:tag" content="Argo">
+<meta property="article:tag" content="Kustomize">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://lfbear.com/assets/images/gitops-argocd.png">
+
+<link rel="canonical" href="https://lfbear.com/2021/07/06/git-ops-argocd-practice/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh'
+  };
+</script>
+
+  <title>GitOps之ArgoCD实践 | 小飞熊的窝</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">小飞熊的窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Be myself, be happy</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
+    <link itemprop="mainEntityOfPage" href="https://lfbear.com/2021/07/06/git-ops-argocd-practice/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="小飞熊">
+      <meta itemprop="description" content="真自己，真快乐">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小飞熊的窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GitOps之ArgoCD实践
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2021-07-06 15:48:58" itemprop="dateCreated datePublished" datetime="2021-07-06T15:48:58+08:00">2021-07-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2021-07-07 17:39:34" itemprop="dateModified" datetime="2021-07-07T17:39:34+08:00">2021-07-07</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>本文旨在通过基于GitLab+ArgoCD的案例来介绍GitOps的一种可行的实践方案。<br>这个案例可以满足对轻量，快速的容器部署需求。如果你部署在K8s中的项目正在寻找一个轻量快捷的部署方式，相信GitOps是一个很好的选择。<br>一般来说，我们的代码都交由GitLab等CVS工具管理，近些年随着GitLab对CI的支持越来越友好，GitOps得以更加容易的落地。</p>
+<span id="more"></span>
+
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h3><ul>
+<li>CI: 由 <a target="_blank" rel="noopener" href="https://docs.gitlab.com/ee/ci/pipelines/">GitLab pipeline</a> 实现</li>
+<li>CD: 由 <a target="_blank" rel="noopener" href="https://argoproj.github.io/argo-cd/">ArgoCD</a> 实现</li>
+<li>Artifact: 也称为制品，可以理解将各自独立的CI和CD连接到一起的东西</li>
+</ul>
+<p><em>本文的CI和CD均为侠义含义，可以简单理解为构建和部署。</em></p>
+<h3 id="CI"><a href="#CI" class="headerlink" title="CI"></a>CI</h3><p>核心： 在GitLab中，我们用 <code>.gitlab-ci.yml</code> 文件用来定义GitLab的CI Pipeline。除去日常的代码检查，单元测试外，比较关键的就是可以对项目做编译，当然也可以直接在gitlab-ci中直接做部署，后面会提及为什么不这么做。</p>
+<h3 id="CD"><a href="#CD" class="headerlink" title="CD"></a>CD</h3><p>这个阶段有两个重点，一是要部署的制品，一般是项目编译的产物，常见的是二进制或包；二是部署指引，就是这些东西要怎么部署，比如放在哪个目录下，如何启动等。因为这个部署指引一般来说比较复杂，包括各种步骤，check point等，因此一般交由单独的系统来负责，因此除非部署过程及其简单，我们一般不使用gitlab-ci来做部署过程，但可以由它来触发部署行为。</p>
+<h2 id="有图有真相"><a href="#有图有真相" class="headerlink" title="有图有真相"></a>有图有真相</h2><p>下图是本文案例的整体实现过程</p>
+<p><img src="/assets/images/gitops-argocd.png" alt="GitOps-Argocd"></p>
+<h3 id="CI-阶段-—-交付物-docker镜像"><a href="#CI-阶段-—-交付物-docker镜像" class="headerlink" title="CI 阶段 — 交付物: docker镜像"></a>CI 阶段 — 交付物: docker镜像</h3><p><em>说在前面：由于GitLab的版本迭代较快，变化较大，如果不清楚目前使用的GitLab版本，请使用help页面中的文档而不是官方文档</em></p>
+<h4 id="User-Story"><a href="#User-Story" class="headerlink" title="User Story"></a>User Story</h4><p>开发者根据各自的开发需求，分别向A项目提交代码。特定的分支(图例中为test_branch)提交会触发<code>.gitlab-ci.yml</code>定义的stage(图例中为build-image)，并执行该stage中声明的脚本，这部分脚本将会根据项目中的Dockerfile打出一个docker镜像，并将镜像推送到指定repo</p>
+<h4 id="gitlab-ci-yml"><a href="#gitlab-ci-yml" class="headerlink" title=".gitlab-ci.yml"></a><code>.gitlab-ci.yml</code></h4><p>图例中的gitlab-ci中构建镜像部分的定义如下：</p>
+<ul>
+<li><code>variables</code>和<code>stages</code>为公共部分，后面不会赘述。</li>
+<li>在<code>build-image</code>的<code>before_script</code>中，会有一个docker register登录的动作，<code>script</code>中仅做了docker build和docker push，将产物推送到镜像仓库</li>
+<li>触发条件：<code>only</code>中定义了触发条件，仅test_branch分支有变化的时候触发（由only字段声的多个条件为’或‘的关系）。<code>except</code>排除条件中对commit标题（也就是commit中的首行）和tag做了排除。至于为什么要排除提定的commit，后面会说到。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">variables:</span><br><span class="line">  REGISTRY_HOST: hub.docker.com</span><br><span class="line">  REGISTRY_IMAGE_TAG: $REGISTRY_HOST/your-repo/your-app:$CI_COMMIT_SHA</span><br><span class="line"></span><br><span class="line">stages:</span><br><span class="line">  - build</span><br><span class="line">  - deploy</span><br><span class="line"></span><br><span class="line">build-image:</span><br><span class="line">  image: docker:20.10</span><br><span class="line">  tags:</span><br><span class="line">    - runner-tag</span><br><span class="line">  stage: build</span><br><span class="line">  before_script:</span><br><span class="line">    - docker login $REGISTRY_HOST -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD</span><br><span class="line">  script:</span><br><span class="line">    - docker build -t $REGISTRY_IMAGE_TAG .</span><br><span class="line">    - docker push $REGISTRY_IMAGE_TAG</span><br><span class="line">  except:</span><br><span class="line">    variables:</span><br><span class="line">      - $CI_COMMIT_TITLE == &quot;SkipCI&quot;</span><br><span class="line">    refs:</span><br><span class="line">      - tags</span><br><span class="line">  only:</span><br><span class="line">    - test_branch</span><br></pre></td></tr></table></figure>
+
+<p>关于gitlab-ci的详细语法，请参照文档使用。</p>
+<h4 id="GitLab-Runner"><a href="#GitLab-Runner" class="headerlink" title="GitLab Runner"></a>GitLab Runner</h4><p>必须，也就是<code>.gitlab-ci.yml</code>具体的执行者，gitlab-runner有<a target="_blank" rel="noopener" href="https://docs.gitlab.com/runner/install/">很多种安装方式</a>，安装完成后记得给它们打tag分组，在<code>.gitlab-ci.yml</code>中可以按照stage纬度指定执行的runner。</p>
+<h3 id="CD-阶段-—-关键词-Kustomize"><a href="#CD-阶段-—-关键词-Kustomize" class="headerlink" title="CD 阶段 — 关键词: Kustomize"></a>CD 阶段 — 关键词: Kustomize</h3><h4 id="Kustomize"><a href="#Kustomize" class="headerlink" title="Kustomize"></a>Kustomize</h4><p>在聊ArgoCD之前，先引入<a target="_blank" rel="noopener" href="https://kustomize.io/">Kustomize</a>这个东西，它是K8s原生的配置管理工具。由它来管理K8s的配置是比较方便的选择。</p>
+<p>设想这样一个场景，你有一个deployment需要部署到2个集群，通常你的作法可能是切到一个集群apply然后再切到另外一个集群apply一下，操作复杂度应该还ok。<br>但是如果有人告诉你不同集群的镜像或启动参数有差异，那又要怎么搞呢。复制出来一份，修改一下差异的地方？操作起来略复杂呢。如果这种deployment有10个或者100个呢。<br>在抓狂前，可以先了解一下Kustomize。部署到不同环境的时候，难免会有差异，至少deployment名字或者label会有差异吧，所以可以选择它来cover这个。</p>
+<p>如果你不知道我在说什么也没关系，你就把这part当做K8s的deployment的yaml就可以了。反正就是用来部署的配置嘛。</p>
+<h4 id="ArgoCD"><a href="#ArgoCD" class="headerlink" title="ArgoCD"></a>ArgoCD</h4><p>下面我们来介绍ArgoCD，它本质上只是一个工具，如图中所示，可以理解为Argo一边监控着GitLab指定repo和分支上面的Kustomize文件，另外一边watch着k8s中的资源，对比两边是否有变化，如果有变化可以自动或手工的发起k8s向的同步。</p>
+<p>可能会有人发问了，为什么要监控GitLab上的Kustomize文件呢？</p>
+<ul>
+<li>如果你在使用Kustomize文件，而并不想使用GitLab来存储，那就不是GitOps了，其实也是可以的，但不是本文讨论的方向。从我个人的使用体感觉得，少借助一个外部工具不是一件很好的事儿么。</li>
+<li>如果你使用GitLab来存储这些部署配置，那为什么是Kustomize文件呢？其实的确不必须是Kustomize文件，ArgoCD提供了很多种部署配置方式，比如helm, ksonnet, jsonnet等</li>
+</ul>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>概括一下CD部分，首先部署需要配置（上文的Kustomize文件），把配置放到git里面，使用CD工具监控这些部署配置与真实部署情况的差异，同样以申明式的方式来管理部署就是我们说的GitOps了。</p>
+<p>最后说一下，因为CD是以git项目中的部署配置（Kustomize文件）为准，如果它刚好跟要部署的项目在同一个git的repo中，就需要在GitLab的pipeline中做一个特殊处理，也就是CI在提交镜像的同时需要去修改git项目中的Kustomize文件，但本次修改又不能再次触发ci的pipeline，所以有了上文的<code>$CI_COMMIT_TITLE == &quot;SkipCI&quot;</code>这个排除条件（适用于10以上版本的GitLab，较高版本有<a target="_blank" rel="noopener" href="https://docs.gitlab.com/ee/ci/yaml/#skip-pipeline">更优雅的方式</a>处理跳过触发），可以看下我的demo项目的这部分pipeline配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">deploy-by-argo:</span><br><span class="line">  image: alpine/git # 这里需要一个含有git的镜像</span><br><span class="line">  stage: deploy</span><br><span class="line">  cache: &#123;&#125;</span><br><span class="line">  script:</span><br><span class="line">    - git config --global user.email &quot;youremail@youremail.org&quot;</span><br><span class="line">    - git config --global user.name &quot;your-name&quot;</span><br><span class="line">    - git checkout test_branch</span><br><span class="line">    - git pull</span><br><span class="line">    - git status</span><br><span class="line">    - sed -i &quot;s#/your-repo/your-app:\w*#/your-repo/your-app:$CI_COMMIT_SHA#&quot; ./hack/deploy/test_branch/patch.yaml</span><br><span class="line">    - git add ./hack/deploy/test_branch/patch.yaml</span><br><span class="line">    - git commit -m &quot;SkipCI&quot;</span><br><span class="line">    - git status</span><br><span class="line">    - git push https://git-user:$GIT_PASSWORD@gitlab.com/your-repo/your-app.git --all</span><br><span class="line">  tags:</span><br><span class="line">    - runner-tag</span><br><span class="line">  except:</span><br><span class="line">    variables:</span><br><span class="line">      - $CI_COMMIT_TITLE == &quot;SkipCI&quot;</span><br><span class="line">  only:</span><br><span class="line">    - test_branch</span><br><span class="line">  dependencies:</span><br><span class="line">    - build-image</span><br></pre></td></tr></table></figure>
+
+<p>./hack/deploy/test_branch/patch.yaml 文件内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: your-app</span><br><span class="line">  namespace: default</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1</span><br><span class="line">  template:</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">        - name: instance</span><br><span class="line">          image: hub.docker.com/your-repo/your-app:abcd123 # Don&#x27;t edit the tag, ci will auto replace it</span><br></pre></td></tr></table></figure>
+
+<p><strong>以上就是GitOps之ArgoCD的实践全部内容，任何问题可以在文后留言交流。</strong></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/GitLab/" rel="tag"># GitLab</a>
+              <a href="/tags/CI/" rel="tag"># CI</a>
+              <a href="/tags/CD/" rel="tag"># CD</a>
+              <a href="/tags/Argo/" rel="tag"># Argo</a>
+              <a href="/tags/Kustomize/" rel="tag"># Kustomize</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/03/15/2020-03-15-change-to-hexo/" rel="prev" title="change to hexo">
+      <i class="fa fa-chevron-left"></i> change to hexo
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="nav-number">2.1.</span> <span class="nav-text">组成部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CI"><span class="nav-number">2.2.</span> <span class="nav-text">CI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CD"><span class="nav-number">2.3.</span> <span class="nav-text">CD</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%89%E5%9B%BE%E6%9C%89%E7%9C%9F%E7%9B%B8"><span class="nav-number">3.</span> <span class="nav-text">有图有真相</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CI-%E9%98%B6%E6%AE%B5-%E2%80%94-%E4%BA%A4%E4%BB%98%E7%89%A9-docker%E9%95%9C%E5%83%8F"><span class="nav-number">3.1.</span> <span class="nav-text">CI 阶段 — 交付物: docker镜像</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#User-Story"><span class="nav-number">3.1.1.</span> <span class="nav-text">User Story</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gitlab-ci-yml"><span class="nav-number">3.1.2.</span> <span class="nav-text">.gitlab-ci.yml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GitLab-Runner"><span class="nav-number">3.1.3.</span> <span class="nav-text">GitLab Runner</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CD-%E9%98%B6%E6%AE%B5-%E2%80%94-%E5%85%B3%E9%94%AE%E8%AF%8D-Kustomize"><span class="nav-number">3.2.</span> <span class="nav-text">CD 阶段 — 关键词: Kustomize</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Kustomize"><span class="nav-number">3.2.1.</span> <span class="nav-text">Kustomize</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ArgoCD"><span class="nav-number">3.2.2.</span> <span class="nav-text">ArgoCD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%8F%E7%BB%93"><span class="nav-number">3.2.3.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="小飞熊"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">小飞熊</p>
+  <div class="site-description" itemprop="description">真自己，真快乐</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">97</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/lfbear" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;lfbear" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2005 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-star"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小飞熊的窝 - 一头程序员的成长记录</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '7b757d85c9dc912b18d5',
+      clientSecret: '3056c1a6f4fd569a8206d73209a04c05483ad8e3',
+      repo        : 'https://github.com/lfbear/myblog',
+      owner       : 'lfbear',
+      admin       : ['lfbear'],
+      id          : '761963f27fae8b447c668c59802e23af',
+        language: 'en | zh-CN | zh-TW',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+</body>
+</html>

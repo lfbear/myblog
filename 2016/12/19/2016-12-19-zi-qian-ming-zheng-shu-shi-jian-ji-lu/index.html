@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"lfbear.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"lfbear.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="非常感谢如下资料，提供了极为帮助的参考 https:&#x2F;&#x2F;jamielinux.com&#x2F;docs&#x2F;openssl-certificate-authority&#x2F;index.html http:&#x2F;&#x2F;colinzhouyj.blog.51cto.com&#x2F;2265679&#x2F;1566438">
@@ -26,10 +26,10 @@
 <meta property="og:url" content="https://lfbear.com/2016/12/19/2016-12-19-zi-qian-ming-zheng-shu-shi-jian-ji-lu/index.html">
 <meta property="og:site_name" content="小飞熊的窝">
 <meta property="og:description" content="非常感谢如下资料，提供了极为帮助的参考 https:&#x2F;&#x2F;jamielinux.com&#x2F;docs&#x2F;openssl-certificate-authority&#x2F;index.html http:&#x2F;&#x2F;colinzhouyj.blog.51cto.com&#x2F;2265679&#x2F;1566438">
-<meta property="og:locale" content="zh">
+<meta property="og:locale">
 <meta property="og:image" content="https://lfbear.com/upload/2016/12/QQ20161219-0.png">
 <meta property="article:published_time" content="2016-12-19T00:22:01.000Z">
-<meta property="article:modified_time" content="2021-05-12T06:25:48.333Z">
+<meta property="article:modified_time" content="2021-07-07T09:39:34.697Z">
 <meta property="article:author" content="小飞熊">
 <meta property="article:tag" content="ca">
 <meta property="article:tag" content="根证书">
@@ -46,7 +46,8 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true
+    isPost : true,
+    lang   : 'zh'
   };
 </script>
 
@@ -99,14 +100,12 @@
 
   <div class="site-meta">
 
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">小飞熊的窝</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">Be myself, be happy</p>
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">小飞熊的窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Be myself, be happy</p>
   </div>
 
   <div class="site-nav-right">
@@ -116,8 +115,9 @@
 </div>
 
 
+
+
 <nav class="site-nav">
-  
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
 
@@ -145,8 +145,11 @@
 
   </li>
   </ul>
-
 </nav>
+
+
+
+
 </div>
     </header>
 
@@ -162,14 +165,13 @@
         <div class="content-wrap">
           
 
-          <div class="content">
+          <div class="content post posts-expand">
             
 
-  <div class="posts-expand">
-      
+    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
     <link itemprop="mainEntityOfPage" href="https://lfbear.com/2016/12/19/2016-12-19-zi-qian-ming-zheng-shu-shi-jian-ji-lu/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -200,7 +202,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-12 14:25:48" itemprop="dateModified" datetime="2021-05-12T14:25:48+08:00">2021-05-12</time>
+                <time title="Modified: 2021-07-07 17:39:34" itemprop="dateModified" datetime="2021-07-07T17:39:34+08:00">2021-07-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -226,7 +228,7 @@
         <blockquote>非常感谢如下资料，提供了极为帮助的参考</p>
 <p>https://jamielinux.com/docs/openssl-certificate-authority/index.html</p>
 <p>http://colinzhouyj.blog.51cto.com/2265679/1566438</p></blockquote>
-<p><a id="more"></a></p>
+<p><span id="more"></span></p>
 <h3>准备：</h3>
 <p>使用工具&nbsp;openssl</p>
 <h3>第一步：根证书</h3>
@@ -304,14 +306,14 @@ openssl genrsa -aes256 \
       -out intermediate/private/www.example.com.key.pem 2048
 chmod 400 intermediate/private/www.example.com.key.pem
 
-<p>#制作www证书<br>cd /root/ca<br>openssl req -config intermediate/intermediate-ca.cnf <br>      -key intermediate/private/<a href="http://www.example.com.key.pem" target="_blank" rel="noopener">www.example.com.key.pem</a> <br>      -new -sha256 -out intermediate/csr/<a href="http://www.example.com.csr.pem" target="_blank" rel="noopener">www.example.com.csr.pem</a><br>#这里依旧要求填写信息，特别注意：此处的Common Name要填写你证书服务器的域名 比如<a href="http://www.example.com" target="_blank" rel="noopener">www.example.com</a><br>#Country Name (2 letter code) [XX]:CN<br>#State or Province Name []:Beijing<br>#Locality Name []:Beijing<br>#Organization Name []:Example Ltd<br>#Organizational Unit Name []:Example Ltd Web Services<br>#Common Name []:<a href="http://www.example.com" target="_blank" rel="noopener">www.example.com</a><br>#Email Address []:</p>
-<p>#使用中间证书为其签名<br>cd /root/ca<br>openssl ca -config intermediate/intermediate-ca.cnf <br>      -extensions server_cert -days 375 -notext -md sha256 <br>      -in intermediate/csr/<a href="http://www.example.com.csr.pem" target="_blank" rel="noopener">www.example.com.csr.pem</a> <br>      -out intermediate/certs/<a href="http://www.example.com.cert.pem" target="_blank" rel="noopener">www.example.com.cert.pem</a><br>chmod 444 intermediate/certs/<a href="http://www.example.com.cert.pem" target="_blank" rel="noopener">www.example.com.cert.pem</a><br></pre></p>
+<p>#制作www证书<br>cd /root/ca<br>openssl req -config intermediate/intermediate-ca.cnf <br>      -key intermediate/private/<a target="_blank" rel="noopener" href="http://www.example.com.key.pem">www.example.com.key.pem</a> <br>      -new -sha256 -out intermediate/csr/<a target="_blank" rel="noopener" href="http://www.example.com.csr.pem">www.example.com.csr.pem</a><br>#这里依旧要求填写信息，特别注意：此处的Common Name要填写你证书服务器的域名 比如<a target="_blank" rel="noopener" href="http://www.example.com">www.example.com</a><br>#Country Name (2 letter code) [XX]:CN<br>#State or Province Name []:Beijing<br>#Locality Name []:Beijing<br>#Organization Name []:Example Ltd<br>#Organizational Unit Name []:Example Ltd Web Services<br>#Common Name []:<a target="_blank" rel="noopener" href="http://www.example.com">www.example.com</a><br>#Email Address []:</p>
+<p>#使用中间证书为其签名<br>cd /root/ca<br>openssl ca -config intermediate/intermediate-ca.cnf <br>      -extensions server_cert -days 375 -notext -md sha256 <br>      -in intermediate/csr/<a target="_blank" rel="noopener" href="http://www.example.com.csr.pem">www.example.com.csr.pem</a> <br>      -out intermediate/certs/<a target="_blank" rel="noopener" href="http://www.example.com.cert.pem">www.example.com.cert.pem</a><br>chmod 444 intermediate/certs/<a target="_blank" rel="noopener" href="http://www.example.com.cert.pem">www.example.com.cert.pem</a><br></pre></p>
 <p>签名完成后 依旧可以看到intermediate/index.txt中的签名记录，最后查看和验证证书</p>
 <pre class="brush:bash">#查看证书
 openssl x509 -noout -text \
       -in intermediate/certs/www.example.com.cert.pem
 
-<p>#验证证书<br>openssl verify -CAfile intermediate/certs/ca-chain.cert.pem <br>      intermediate/certs/<a href="http://www.example.com.cert.pem" target="_blank" rel="noopener">www.example.com.cert.pem</a><br>#以下显示为验证成功<br>#<a href="http://www.example.com.cert.pem" target="_blank" rel="noopener">www.example.com.cert.pem</a>: OK</pre></p>
+<p>#验证证书<br>openssl verify -CAfile intermediate/certs/ca-chain.cert.pem <br>      intermediate/certs/<a target="_blank" rel="noopener" href="http://www.example.com.cert.pem">www.example.com.cert.pem</a><br>#以下显示为验证成功<br>#<a target="_blank" rel="noopener" href="http://www.example.com.cert.pem">www.example.com.cert.pem</a>: OK</pre></p>
 <h4>3.2 证书部署</h4>
 <p>由于我们是自签名的证书，所以需要pc信任根证书，将ca-chain.cert.pem文件分发给需要的pc，导入即可（windows可能需要将改文件拆分成跟证书和中间证书两个crt为扩展名的文件才可以）</p>
 <p>nginx的ssl配置中 会有两行跟证书和秘钥相关的：</p>
@@ -395,11 +397,11 @@ DNS.3 = example.net</pre>
   
   
 
-  </div>
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -446,7 +448,7 @@ DNS.3 = example.net</pre>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">第一步：根证书</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 准备目录和配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 &amp;nbsp;生成私钥和证书</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成私钥"><span class="nav-number"></span> <span class="nav-text">生成私钥</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成证书"><span class="nav-number"></span> <span class="nav-text">生成证书</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#然后需要填写证书的一些内容-下面是样例-可以根据自己的实际情况填写"><span class="nav-number"></span> <span class="nav-text">然后需要填写证书的一些内容 下面是样例 可以根据自己的实际情况填写</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">0.1.</span> <span class="nav-text">1.3 根证书完成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">第二步：中级证书颁发机构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">&amp;nbsp;2.2 生成私钥和证书</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成intermediate证书"><span class="nav-number"></span> <span class="nav-text">生成intermediate证书</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意这里填写的Common-Name与根证书的要不同"><span class="nav-number"></span> <span class="nav-text">注意这里填写的Common Name与根证书的要不同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用根证书给intermediate证书签名"><span class="nav-number"></span> <span class="nav-text">用根证书给intermediate证书签名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">0.1.</span> <span class="nav-text">2.3验证证书，合并证书</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#"><span class="nav-number">1.</span> <span class="nav-text">第三步：签署最终证书（此处以签署nginx使用的ssl证书为例）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">1.1.</span> <span class="nav-text">3.1&amp;nbsp;生成证书，证书签名，证书验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">1.2.</span> <span class="nav-text">3.2 证书部署</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#"><span class="nav-number">1.3.</span> <span class="nav-text">3.3 多域名证书</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">准备：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">第一步：根证书</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 准备目录和配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">1.2  生成私钥和证书</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%A7%81%E9%92%A5"><span class="nav-number"></span> <span class="nav-text">生成私钥</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E8%AF%81%E4%B9%A6"><span class="nav-number"></span> <span class="nav-text">生成证书</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%84%B6%E5%90%8E%E9%9C%80%E8%A6%81%E5%A1%AB%E5%86%99%E8%AF%81%E4%B9%A6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%86%85%E5%AE%B9-%E4%B8%8B%E9%9D%A2%E6%98%AF%E6%A0%B7%E4%BE%8B-%E5%8F%AF%E4%BB%A5%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E7%9A%84%E5%AE%9E%E9%99%85%E6%83%85%E5%86%B5%E5%A1%AB%E5%86%99"><span class="nav-number"></span> <span class="nav-text">然后需要填写证书的一些内容 下面是样例 可以根据自己的实际情况填写</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">0.1.</span> <span class="nav-text">1.3 根证书完成</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">第二步：中级证书颁发机构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text"> 2.2 生成私钥和证书</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%9F%E6%88%90intermediate%E8%AF%81%E4%B9%A6"><span class="nav-number"></span> <span class="nav-text">生成intermediate证书</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E8%BF%99%E9%87%8C%E5%A1%AB%E5%86%99%E7%9A%84Common-Name%E4%B8%8E%E6%A0%B9%E8%AF%81%E4%B9%A6%E7%9A%84%E8%A6%81%E4%B8%8D%E5%90%8C"><span class="nav-number"></span> <span class="nav-text">注意这里填写的Common Name与根证书的要不同</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%94%A8%E6%A0%B9%E8%AF%81%E4%B9%A6%E7%BB%99intermediate%E8%AF%81%E4%B9%A6%E7%AD%BE%E5%90%8D"><span class="nav-number"></span> <span class="nav-text">用根证书给intermediate证书签名</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">0.1.</span> <span class="nav-text">2.3验证证书，合并证书</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">第三步：签署最终证书（此处以签署nginx使用的ssl证书为例）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">3.1 生成证书，证书签名，证书验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">3.2 证书部署</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">3.3 多域名证书</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -462,7 +464,7 @@ DNS.3 = example.net</pre>
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -475,7 +477,7 @@ DNS.3 = example.net</pre>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">90</span>
+        <span class="site-state-item-count">97</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -502,6 +504,8 @@ DNS.3 = example.net</pre>
       <div class="footer-inner">
         
 
+        
+
 <div class="copyright">
   
   &copy; 2005 – 
@@ -511,10 +515,7 @@ DNS.3 = example.net</pre>
   </span>
   <span class="author" itemprop="copyrightHolder">小飞熊的窝 - 一头程序员的成长记录</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a>
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
   </div>
 
         
@@ -567,6 +568,26 @@ DNS.3 = example.net</pre>
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '7b757d85c9dc912b18d5',
+      clientSecret: '3056c1a6f4fd569a8206d73209a04c05483ad8e3',
+      repo        : 'https://github.com/lfbear/myblog',
+      owner       : 'lfbear',
+      admin       : ['lfbear'],
+      id          : 'eace63018a2ef6bdd2ac193fb1e000e7',
+        language: 'en | zh-CN | zh-TW',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

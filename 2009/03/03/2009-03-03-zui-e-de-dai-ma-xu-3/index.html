@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"lfbear.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"lfbear.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="继2段罪恶的代码后，这次是校内最近比较热门的游戏，开心农场。依旧先说在前面：本段代码仅供学习研究使用，请不要部署到服务器端供浏览器用户非法使用，否则后果自负！请尊重游戏开发人员的辛勤劳动！ [2009-04-27]开心农场发布紧急通知，打击使用外挂的玩家。本次学习研究并非为了发布可用的外挂程序来取悦玩家，但程序的确实现的&amp;ldquo;外挂&amp;rdquo;的功能。为了防止本文引起不必要的法律纠纷，现关">
@@ -26,10 +26,10 @@
 <meta property="og:url" content="https://lfbear.com/2009/03/03/2009-03-03-zui-e-de-dai-ma-xu-3/index.html">
 <meta property="og:site_name" content="小飞熊的窝">
 <meta property="og:description" content="继2段罪恶的代码后，这次是校内最近比较热门的游戏，开心农场。依旧先说在前面：本段代码仅供学习研究使用，请不要部署到服务器端供浏览器用户非法使用，否则后果自负！请尊重游戏开发人员的辛勤劳动！ [2009-04-27]开心农场发布紧急通知，打击使用外挂的玩家。本次学习研究并非为了发布可用的外挂程序来取悦玩家，但程序的确实现的&amp;ldquo;外挂&amp;rdquo;的功能。为了防止本文引起不必要的法律纠纷，现关">
-<meta property="og:locale" content="zh">
+<meta property="og:locale">
 <meta property="og:image" content="https://lfbear.com/assets/images/2009/03/happyfarm-demo.gif">
 <meta property="article:published_time" content="2009-03-03T00:51:00.000Z">
-<meta property="article:modified_time" content="2021-05-12T06:25:48.329Z">
+<meta property="article:modified_time" content="2021-07-07T09:39:34.697Z">
 <meta property="article:author" content="小飞熊">
 <meta property="article:tag" content="php">
 <meta property="article:tag" content="外挂">
@@ -45,7 +45,8 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true
+    isPost : true,
+    lang   : 'zh'
   };
 </script>
 
@@ -98,14 +99,12 @@
 
   <div class="site-meta">
 
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">小飞熊的窝</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">Be myself, be happy</p>
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">小飞熊的窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Be myself, be happy</p>
   </div>
 
   <div class="site-nav-right">
@@ -115,8 +114,9 @@
 </div>
 
 
+
+
 <nav class="site-nav">
-  
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
 
@@ -144,8 +144,11 @@
 
   </li>
   </ul>
-
 </nav>
+
+
+
+
 </div>
     </header>
 
@@ -161,14 +164,13 @@
         <div class="content-wrap">
           
 
-          <div class="content">
+          <div class="content post posts-expand">
             
 
-  <div class="posts-expand">
-      
+    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
     <link itemprop="mainEntityOfPage" href="https://lfbear.com/2009/03/03/2009-03-03-zui-e-de-dai-ma-xu-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -199,7 +201,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-12 14:25:48" itemprop="dateModified" datetime="2021-05-12T14:25:48+08:00">2021-05-12</time>
+                <time title="Modified: 2021-07-07 17:39:34" itemprop="dateModified" datetime="2021-07-07T17:39:34+08:00">2021-07-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -224,13 +226,13 @@
       
         <p>继2段罪恶的代码后，这次是校内最近比较热门的游戏，开心农场。依旧先说在前面：本段代码仅供学习研究使用，请不要部署到服务器端供浏览器用户非法使用，否则后果自负！请尊重游戏开发人员的辛勤劳动！</p>
 <p><span style="color: #ff0000;">[2009-04-27]开心农场发布紧急通知，打击使用外挂的玩家。本次学习研究并非为了发布可用的外挂程序来取悦玩家，但程序的确实现的&ldquo;外挂&rdquo;的功能。为了防止本文引起不必要的法律纠纷，现关闭本文的评论功能，停止更新程序（目前程序已不可使用），望大家谅解。非针对&ldquo;开心农场&rdquo;游戏的学习与交流还会继续，请注意文末的交流方式。</span></p>
-<p><a id="more"></a></p>
+<p><span id="more"></span></p>
 <p>[caption id="attachment_278" align="aligncenter" width="663" caption="程序运行截图"]<a href="/assets/images/2009/03/happyfarm-demo.gif"><img class="size-full wp-image-278" title="happyfarm-demo" src="/assets/images/2009/03/happyfarm-demo.gif" alt="程序运行截图" width="663" height="591" /></a>[/caption]</p>
 <p>除不可以自动卖掉仓库里的果实以外(自己卖掉果实才有成就感嘛)，其他功能全部支持。这次先讲怎么使用，给大家一个感性上的认识，然后才有兴趣和动力去深入理性学习和研究嘛~</p>
 <p>使用前请先下载<a title="php运行库" href="/assets/images/php_run_lib.rar" target="_blank"><span style="color: #0000cc;">php运行库</span></a>，然后下载程序代码：happyfarm&nbsp;[目前停止下载] <span style="color: #008000;">(版本:v0.6 alpha&nbsp;| update:2009-04-02 | md5: 812a81ef79d61befc026316583e77758 | 更新内容:结合开心农场改版，将几个url做了变更，并将整个流程做了优化) </span>将程序解压后放置于php运行库的program目录下，使得happyfarm目录与bin目录同级 ，然后配置参数文件，和抢车位的一样， myinfo.ini 和 friend.ini 中(配置文件中附有注释，记得用写字板别用记事本，否则会出乱码，熊熊用的是editplus 很方便很大众的编辑器) 配置好以后，就可以使用啦！</p>
 <p>貌似说的简单哦~ 其实很多人可能会卡到配置文件这一关，呵呵，别心急，让熊熊来教大家，下面是知识时间哦~</p>
 <p>配置参数文件myinfo.ini 中除去 ownerid(开心农场id) 其他大家应该很快就完成了，开心农场id 这个怎么弄呢，首先登录校内，打开开心农场的页面，然后点击右键，选择查看源文件。这里是校内开心农场首页的源代码，然后搜索&ldquo; a23163_app.xn_data= &rdquo;你会发现xn_user:后面跟着一串数字，这就是你的ownerid(开心农场id)&nbsp;，先不要太心急，大家知道这段代码是什么吗，这就是传说中的js，有兴趣的同学可以看一下，这段js中的数据会在开心农场的flash里面用得到哦，呵呵，第一阶段ok了，可以把自己的id放到配置文件中，用 happyfarm.bat 来运行外挂了(ps:这段bat其他没什么神奇的 就是用php库来运行php脚本，而bin文件夹下放的就是php库，请务必保持happyfarm这个文件夹与bin文件夹同级哦，否则就调不到php库文件了)</p>
-<p>下面要做的是配置好友信息，否则怎么去偷好友的东西呀。首先你需要下载一个firefox，哦？ 你还没有这个，那怎么当web程序员呀，这个可是web程序员必不可少的浏览器哦，然后安装firebug插件。这个如果没安装过可以网上搜一下，很简单的。同样用firefox打开校内，登录，来到开心农场页，打开firebug，开始抓包(对抓包感兴趣的同学可以学习一下网络基础教程)，不绕弯子了，点开好友侧边栏，这时最好先清除一下firebug里面的记录，然后随便点一个好友的头像，会发现有一个post到<a href="http://happyfarm.fivminutes.com/api.php?mod=user&amp;act=run&amp;flag=1&amp;new=1&amp;farmKey" target="_blank" rel="noopener">http://*/api.php?mod=user&amp;act=run&amp;flag=1&amp;new=1&amp;farmKey=</a>..... 这个url 的包发出去了，这是点击post的数据 会有 ownerId=xxxxxx 这个xxxxxx就是刚刚点击那个好友的uid咯，把这个好友的信息配到friend.ini 中吧，xxxx = 好友名字 就可以了 多条换行。有人会问了，怎么不自动抓取自己的uid和好友的uid呢，其实做到这个也不难，但是那样还有学习的乐趣和意义了嘛？记住，我们是在学习知识哦~</p>
+<p>下面要做的是配置好友信息，否则怎么去偷好友的东西呀。首先你需要下载一个firefox，哦？ 你还没有这个，那怎么当web程序员呀，这个可是web程序员必不可少的浏览器哦，然后安装firebug插件。这个如果没安装过可以网上搜一下，很简单的。同样用firefox打开校内，登录，来到开心农场页，打开firebug，开始抓包(对抓包感兴趣的同学可以学习一下网络基础教程)，不绕弯子了，点开好友侧边栏，这时最好先清除一下firebug里面的记录，然后随便点一个好友的头像，会发现有一个post到<a target="_blank" rel="noopener" href="http://happyfarm.fivminutes.com/api.php?mod=user&amp;act=run&amp;flag=1&amp;new=1&amp;farmKey">http://*/api.php?mod=user&amp;act=run&amp;flag=1&amp;new=1&amp;farmKey=</a>..... 这个url 的包发出去了，这是点击post的数据 会有 ownerId=xxxxxx 这个xxxxxx就是刚刚点击那个好友的uid咯，把这个好友的信息配到friend.ini 中吧，xxxx = 好友名字 就可以了 多条换行。有人会问了，怎么不自动抓取自己的uid和好友的uid呢，其实做到这个也不难，但是那样还有学习的乐趣和意义了嘛？记住，我们是在学习知识哦~</p>
 <p>配置好了，喜欢程序的人就可以用编辑器(不是记事本哦) 打开happyfarm.php 看到&ldquo;游戏参数配置 Configuration I&rdquo;了吗，可以修改这里，让程序更加个性化为你服务哦~ 然后慢慢的，有c语言基础的同学们可以试着改改代码哦~ 熊熊的代码写的不好，请见谅哦(都是上班时候偷偷写的，只顾速度了) 总之呢，了解的越多，就能从这个小程序里面挖掘更多的知识，为己所用。</p>
 <p>好了，先到这里吧，有问题的同学多多与我交流哦，希望听到大家的批评指正！</p>
 
@@ -268,11 +270,11 @@
   
   
 
-  </div>
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -334,7 +336,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -347,7 +349,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">90</span>
+        <span class="site-state-item-count">97</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -374,6 +376,8 @@
       <div class="footer-inner">
         
 
+        
+
 <div class="copyright">
   
   &copy; 2005 – 
@@ -383,10 +387,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">小飞熊的窝 - 一头程序员的成长记录</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a>
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
   </div>
 
         
@@ -439,6 +440,26 @@
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '7b757d85c9dc912b18d5',
+      clientSecret: '3056c1a6f4fd569a8206d73209a04c05483ad8e3',
+      repo        : 'https://github.com/lfbear/myblog',
+      owner       : 'lfbear',
+      admin       : ['lfbear'],
+      id          : '01e9c464246e67ed789f93d72fe03b56',
+        language: 'en | zh-CN | zh-TW',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

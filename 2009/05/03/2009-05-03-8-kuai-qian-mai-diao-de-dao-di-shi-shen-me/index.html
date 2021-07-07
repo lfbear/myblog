@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 4.2.0">
+<meta name="generator" content="Hexo 5.4.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"lfbear.com","root":"/","scheme":"Mist","version":"7.7.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"lfbear.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="由于前段时间写了一个罪恶的小程序，今天好奇地用百度搜了下&amp;ldquo;开心农场 外挂&amp;rdquo;发现众多页面，然而点进去一看，大部分都已经失效。 看来这段时间开心团队做的努力还是有效果的，不过显然的，开心团队并没有使出必杀，因为现在flash仍就可以反编译，还有线索可寻。 然而，一条淘宝上的链接还是很令人惊叹的&amp;ldquo;原价20，现价8块&amp;rdquo;公然叫卖开心农场外挂。">
@@ -26,9 +26,9 @@
 <meta property="og:url" content="https://lfbear.com/2009/05/03/2009-05-03-8-kuai-qian-mai-diao-de-dao-di-shi-shen-me/index.html">
 <meta property="og:site_name" content="小飞熊的窝">
 <meta property="og:description" content="由于前段时间写了一个罪恶的小程序，今天好奇地用百度搜了下&amp;ldquo;开心农场 外挂&amp;rdquo;发现众多页面，然而点进去一看，大部分都已经失效。 看来这段时间开心团队做的努力还是有效果的，不过显然的，开心团队并没有使出必杀，因为现在flash仍就可以反编译，还有线索可寻。 然而，一条淘宝上的链接还是很令人惊叹的&amp;ldquo;原价20，现价8块&amp;rdquo;公然叫卖开心农场外挂。">
-<meta property="og:locale" content="zh">
+<meta property="og:locale">
 <meta property="article:published_time" content="2009-05-03T03:55:16.000Z">
-<meta property="article:modified_time" content="2021-05-12T06:25:48.329Z">
+<meta property="article:modified_time" content="2021-07-07T09:39:34.697Z">
 <meta property="article:author" content="小飞熊">
 <meta property="article:tag" content="知识产权">
 <meta name="twitter:card" content="summary">
@@ -41,7 +41,8 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : true
+    isPost : true,
+    lang   : 'zh'
   };
 </script>
 
@@ -94,14 +95,12 @@
 
   <div class="site-meta">
 
-    <div>
-      <a href="/" class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">小飞熊的窝</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
-    </div>
-        <p class="site-subtitle">Be myself, be happy</p>
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">小飞熊的窝</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Be myself, be happy</p>
   </div>
 
   <div class="site-nav-right">
@@ -111,8 +110,9 @@
 </div>
 
 
+
+
 <nav class="site-nav">
-  
   <ul id="menu" class="menu">
         <li class="menu-item menu-item-home">
 
@@ -140,8 +140,11 @@
 
   </li>
   </ul>
-
 </nav>
+
+
+
+
 </div>
     </header>
 
@@ -157,14 +160,13 @@
         <div class="content-wrap">
           
 
-          <div class="content">
+          <div class="content post posts-expand">
             
 
-  <div class="posts-expand">
-      
+    
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh">
     <link itemprop="mainEntityOfPage" href="https://lfbear.com/2009/05/03/2009-05-03-8-kuai-qian-mai-diao-de-dao-di-shi-shen-me/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -195,7 +197,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-05-12 14:25:48" itemprop="dateModified" datetime="2021-05-12T14:25:48+08:00">2021-05-12</time>
+                <time title="Modified: 2021-07-07 17:39:34" itemprop="dateModified" datetime="2021-07-07T17:39:34+08:00">2021-07-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -221,7 +223,7 @@
         <div>由于前段时间写了一个罪恶的小程序，今天好奇地用百度搜了下&ldquo;开心农场 外挂&rdquo;发现众多页面，然而点进去一看，大部分都已经失效。</div>
 <div>看来这段时间开心团队做的努力还是有效果的，不过显然的，开心团队并没有使出必杀，因为现在flash仍就可以反编译，还有线索可寻。</div>
 <div>然而，一条淘宝上的链接还是很令人惊叹的&ldquo;原价20，现价8块&rdquo;公然叫卖开心农场外挂。</div>
-<a id="more"></a>
+<span id="more"></span>
 <div>可能很多游戏玩家对这种现象感觉不足为奇，人家有能力编写外挂程序，卖出去属于自己的劳动所得，有什么大惊小怪的呀。如果是过去，我同样会有这种想法，并且如果有可能还会把自己编写的外挂卖出去。但是自从&ldquo;珊瑚虫&rdquo;事件以后，就没有了这种胆量，害怕被河蟹掉，但是仍就为珊瑚虫感觉不平，认为他是不正当商业竞争的牺牲品。</div>
 <div>直到上班以后，我自己写起了web game，当刚刚发布的小游戏被很多人用上外挂来刷的时候，感觉的确很不爽，这加速了游戏的死亡。每个游戏和一个生命一样，慢慢成长，然后慢慢的死亡。而外挂，就像毒品一样，使游戏过早的死掉。当看着自己开发的游戏这样死掉的时候，我想每一位开发者，都会很伤心的，一样的，游戏玩家如果设身处地的站在开发者角度考虑，也会有类似的感触的。</div>
 <div>言归正传，继续来说这8块钱的外挂，程序编写者可能会认为把他卖掉一方面可能得到money，另一方面很好的证明了自己的能力。没错的，作为程序员来说，的确会有这样迫切希望得到成就感的心理。再插个话题，说一下前几个星期我看的一个TV节目，XX卫视的魔术节目，其中有一位参赛选手很有信心的告诉刘谦他在看完一个魔术后，数分钟内就发现了破绽并重现了魔术，结果被刘谦哄下了台。期间，主持人说的话让我感觉特别有说服力，能破解一个魔术，并不能证明你比魔术师还厉害，能创造这个魔术的人才是真正的高人。同样的道理，掌握一点编程的技能就去写了外挂来证明自己，其实这种做法真的错了，先讲法律，单从道德上来说，如果没有人开发游戏，这个外挂还如何存在呢？不同的游戏外挂虽然不同，但原理大同小异，都是些小伎俩。但是游戏开发者所付出的辛苦又有多少人能体会到呢，所以不禁让我想到，这8块钱到底卖掉的是什么呢？我想说这卖掉的是自己的道德，一点儿都不夸张吧。</div>
@@ -259,11 +261,11 @@
   
   
 
-  </div>
 
 
           </div>
           
+    <div class="comments" id="gitalk-container"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -325,7 +327,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -338,7 +340,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">90</span>
+        <span class="site-state-item-count">97</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -365,6 +367,8 @@
       <div class="footer-inner">
         
 
+        
+
 <div class="copyright">
   
   &copy; 2005 – 
@@ -374,10 +378,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">小飞熊的窝 - 一头程序员的成长记录</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a>
-  </div>
-  <span class="post-meta-divider">|</span>
-  <div class="theme-info">Theme – <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
   </div>
 
         
@@ -430,6 +431,26 @@
   
 
   
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '7b757d85c9dc912b18d5',
+      clientSecret: '3056c1a6f4fd569a8206d73209a04c05483ad8e3',
+      repo        : 'https://github.com/lfbear/myblog',
+      owner       : 'lfbear',
+      admin       : ['lfbear'],
+      id          : '0dfef43a493332376d448a1cf6e465fa',
+        language: 'en | zh-CN | zh-TW',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
 
 </body>
 </html>

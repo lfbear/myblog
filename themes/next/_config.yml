@@ -636,7 +636,7 @@ livere_uid: # <your_uid>
 gitalk:
   enable: true
   github_id: lfbear # GitHub repo owner
-  repo: https://github.com/lfbear/myblog # Repository name to store issues
+  repo: myblog # Repository name to store issues
   client_id: 7b757d85c9dc912b18d5 # GitHub Application Client ID
   client_secret: 3056c1a6f4fd569a8206d73209a04c05483ad8e3 # GitHub Application Client Secret
   admin_user: lfbear # GitHub repo owner and collaborators, only these guys can initialize gitHub issues
@@ -946,10 +946,10 @@ vendors:
   valine:
 
   # Gitalk
-  # gitalk_js: //cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js
-  # gitalk_css: //cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css
-  gitalk_js:
-  gitalk_css:
+  gitalk_js: //cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js
+  gitalk_css: //cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css
+  #gitalk_js:
+  #gitalk_css:
 
   # Algolia Search
   # algolia_search: //cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js

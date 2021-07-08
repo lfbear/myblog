@@ -2,7 +2,7 @@
 title: GitOps之ArgoCD实践
 abbrlink: 11197
 date: 2021-07-06 15:48:58
-tags: [GitLab,CI,CD,Argo,Kustomize]
+tags: [GitLab,CI,CD,Argo,Kustomize,primary]
 ---
 
 ## 背景

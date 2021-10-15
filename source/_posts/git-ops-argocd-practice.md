@@ -159,3 +159,7 @@ spec:
 ```
 
 **以上就是GitOps之ArgoCD的实践全部内容，任何问题可以在文后留言交流。**
+
+### update at 2021-10-15
+追加一个GitOps Demo: https://github.com/lfbear/gitops-demo
+在上文基础上做了简化，便于快速体验GitOps使用。

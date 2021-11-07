@@ -44,7 +44,7 @@ abbrlink: 24308
 openssl工具可以提供不同的配置文件，以生成不同用途和类型的证书。生产跟证书请下载并使用这个配置文件 https://jamielinux.com/docs/openssl-certificate-authority/_downloads/root-config.txt
 
 #### 1.1 准备目录和配置文件
-
+```
 mkdir /root/ca
 cd /root/ca
 #下载root配置文件
@@ -53,19 +53,19 @@ mkdir certs crl newcerts private
 chmod 700 private
 touch index.txt
 echo 1000 > serial
-
+```
 #### 1.2  生成私钥和证书
-
+```
 cd /root/ca
 
-\# 生成私钥
+# 生成私钥
 openssl genrsa -aes256 -out private/ca.key.pem 4096
 #需要给私钥设置一个密码
 #Enter pass phrase for ca.key.pem: secretpassword
 #Verifying - Enter pass phrase for ca.key.pem: secretpassword
 chmod 400 private/ca.key.pem
 
-\# 生成证书
+# 生成证书
 cd /root/ca
 openssl req -config root-ca.cnf \
       -key private/ca.key.pem \
@@ -73,7 +73,7 @@ openssl req -config root-ca.cnf \
       -out certs/ca.cert.pem
 
 #Enter pass phrase for ca.key.pem: secretpassword
-\# 然后需要填写证书的一些内容 下面是样例 可以根据自己的实际情况填写
+# 然后需要填写证书的一些内容 下面是样例 可以根据自己的实际情况填写
 #Country Name (2 letter code) \[XX\]:CN
 #State or Province Name \[\]:Beijing
 #Locality Name \[\]:Beijing
@@ -85,7 +85,7 @@ chmod 444 certs/ca.cert.pem
 
 #验证证书
 openssl x509 -noout -text -in certs/ca.cert.pem
-
+```
 #### 1.3 根证书完成
 
 验证证书后，看到证书信息以及X509v3扩展信息后，根证书的制作到此完成。
@@ -99,7 +99,7 @@ openssl x509 -noout -text -in certs/ca.cert.pem
 这里依然需要一个配置文件，intermediate CA的配置。https://jamielinux.com/docs/openssl-certificate-authority/_downloads/intermediate-config.txt
 
 2.1 准备目录和配置文件
-
+```
 mkdir /root/ca/intermediate
 cd /root/ca/intermediate
 #下载intermediate配置文件
@@ -109,24 +109,24 @@ chmod 700 private
 touch index.txt
 echo 1000 > serial
 echo 1000 > /root/ca/intermediate/crlnumber
-
+```
 ####  2.2 生成私钥和证书
-
-\# 生成intermediate私钥
+```
+# 生成intermediate私钥
 cd /root/ca
 openssl genrsa -aes256 -out intermediate/private/intermediate.key.pem 4096
-\# 设置一个密码
+# 设置一个密码
 #Enter pass phrase for intermediate.key.pem: secretpassword
 #Verifying - Enter pass phrase for intermediate.key.pem: secretpassword
 chmod 400 intermediate/private/intermediate.key.pem
 
-\# 生成intermediate证书
+# 生成intermediate证书
 cd /root/ca
 openssl req -config intermediate/intermediate-ca.cnf -new -sha256 \
       -key intermediate/private/intermediate.key.pem \
       -out intermediate/csr/intermediate.csr.pem
 
-\# 注意这里填写的Common Name与根证书的要不同
+# 注意这里填写的Common Name与根证书的要不同
 #Country Name (2 letter code) \[XX\]:CN
 #State or Province Name \[\]:Beijing
 #Locality Name \[\]:Beijing
@@ -135,7 +135,7 @@ openssl req -config intermediate/intermediate-ca.cnf -new -sha256 \
 #Common Name \[\]: Your Company Intermediate CA
 #Email Address \[\]: admin@none.com
 
-\# 用根证书给intermediate证书签名
+# 用根证书给intermediate证书签名
 cd /root/ca
 openssl ca -config root-ca.cnf -extensions v3\_intermediate\_ca \
       -days 3650 -notext -md sha256 \
@@ -148,13 +148,13 @@ openssl ca -config root-ca.cnf -extensions v3\_intermediate\_ca \
 #Sign the certificate? \[y/n\]: y
 
 chmod 444 intermediate/certs/intermediate.cert.pem
-
+```
 此时能够看到/root/ca/index.txt已经有类似如下的内容了，这个是根证书的签名记录
 
-V 250408122707Z 1000 unknown ... /CN=Alice Ltd Intermediate CA
+`V 250408122707Z 1000 unknown ... /CN=Alice Ltd Intermediate CA`
 
 #### 2.3验证证书，合并证书
-
+```
 #查看intermediate证书
 openssl x509 -noout -text \
       -in intermediate/certs/intermediate.cert.pem
@@ -164,13 +164,13 @@ openssl verify -CAfile certs/ca.cert.pem \
       intermediate/certs/intermediate.cert.pem
 #输出以下内容 代表验证成功
 #intermediate.cert.pem: OK
-
+```
 验证成功后，代表中间证书也制作完成了，这里需要把证书做一个合并
-
+```
 cat intermediate/certs/intermediate.cert.pem \
       certs/ca.cert.pem > intermediate/certs/ca-chain.cert.pem
 chmod 444 intermediate/certs/ca-chain.cert.pem
-
+```
 其实就是把中间证书和根证书的内容放在一起，目的是形成信任链。
 
 ### 第三步：签署最终证书（此处以签署nginx使用的ssl证书为例）
@@ -178,7 +178,7 @@ chmod 444 intermediate/certs/ca-chain.cert.pem
 #### 3.1 生成证书，证书签名，证书验证
 
 #生成证书私钥（一切证书的制作之源）
-cd /root/ca
+```cd /root/ca
 #这里生成了2048位的私钥，而不是4096的，原因是 1.之前生成的根证书和中间证书已经是4096的了 足够安全了；2.4096的证书会大大降低网站的性能
 openssl genrsa -aes256 \
       -out intermediate/private/www.example.com.key.pem 2048
@@ -205,9 +205,9 @@ openssl ca -config intermediate/intermediate-ca.cnf \
       -in intermediate/csr/www.example.com.csr.pem \
       -out intermediate/certs/www.example.com.cert.pem
 chmod 444 intermediate/certs/www.example.com.cert.pem
-
+```
 签名完成后 依旧可以看到intermediate/index.txt中的签名记录，最后查看和验证证书
-
+```
 #查看证书
 openssl x509 -noout -text \
       -in intermediate/certs/www.example.com.cert.pem
@@ -217,13 +217,13 @@ openssl verify -CAfile intermediate/certs/ca-chain.cert.pem \
       intermediate/certs/www.example.com.cert.pem
 #以下显示为验证成功
 #www.example.com.cert.pem: OK
-
+```
 #### 3.2 证书部署
 
 由于我们是自签名的证书，所以需要pc信任根证书，将ca-chain.cert.pem文件分发给需要的pc，导入即可（windows可能需要将改文件拆分成跟证书和中间证书两个crt为扩展名的文件才可以）
 
 nginx的ssl配置中 会有两行跟证书和秘钥相关的：
-
+```
 ssl\_certificate     /your\_nginx\_conf\_dir/www.example.com.cert.pem;
 
 ssl\_certificate\_key /your\_nginx\_conf_dir/www.example.com.nopass.key;
@@ -237,7 +237,7 @@ openssl rsa -in intermediate/private/www.example.com.key.pem -out www.example.co
 #方案2
 openssl x509 -req -in intermediate/csr/www.example.com.csr.pem -CA intermediate/certs/www.example.com.cert.pem \
 -CAkey intermediate/private/www.example.com.key.pem -CAcreateserial -out www.example.com.nopass.key
-
+```
 #### 3.3 多域名证书
 
 一般来讲，证书的Common Name部分就是域名，可以写www.example.com或者*.example.com 但是如果你有多个不同域名，这里就没办法解决了。看到下taobao的https证书，他使用了使用者备用名称（DNS）来解决这个问题的。  
@@ -245,39 +245,39 @@ openssl x509 -req -in intermediate/csr/www.example.com.csr.pem -CA intermediate/
 **a.****首先编辑 intermediate/intermediate-ca.cnf**
 
 将 req 部分改为如下两行
-
-\[ req \]
+```
+[ req ]
 distinguished\_name = req\_distinguished_name
 req\_extensions = v3\_req
-
+```
 **b. 确保req\_distinguished\_name下没有 0.xxx 的标签**，有的话把0.xxx的0. 去掉 最后新增
-
+```
  subjectAltName = @alt_names
-
+``
 **c. 增加 v3_req 部分**
-
-\[ v3_req \]
-\# Extensions to add to a certificate request
+```
+[ v3_req ]
+# Extensions to add to a certificate request
 basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
-
+```
 **d.添加具体的域名**
-
-\# 新增 alt_names,注意括号前后的空格，DNS.x 的数量可以自己加
-\[ alt_names \]
+```
+# 新增 alt_names,注意括号前后的空格，DNS.x 的数量可以自己加
+[ alt_names ]
 DNS.1 = *.example.com
 DNS.2 = www.example.org
 DNS.3 = example.net
-
+```
 **e.注意：生成证书时 Common Name必须在 DNS.x 中**  
 **f.签名证书时 与之前3.1的最后一步略有不同**
-
+```
 openssl ca -config intermediate/intermediate-ca.cnf \
       -extensions v3_req -days 1825 \
       -in intermediate/csr/www.example.com.csr.pem \
       -cert intermediate/certs/ca-chain.cert.pem \
       -keyfile intermediate/private/intermediate.key.pem  \
       -out intermediate/certs/www.example.com.cert.pem
-
+```
 最后：再次感谢文前所提及的两位提供的资料，才能让我的整个实践过程如此顺利。另外，对于证书这里，建议先把逻辑关系理清楚，然后再动手，这样比较不会掉到坑里。

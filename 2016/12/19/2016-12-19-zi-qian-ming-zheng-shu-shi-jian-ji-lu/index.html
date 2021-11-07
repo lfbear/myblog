@@ -29,7 +29,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://lfbear.com/upload/2016/12/QQ20161219-0.png">
 <meta property="article:published_time" content="2016-12-19T00:22:01.000Z">
-<meta property="article:modified_time" content="2021-11-07T13:42:55.440Z">
+<meta property="article:modified_time" content="2021-11-07T13:58:04.132Z">
 <meta property="article:author" content="小飞熊">
 <meta property="article:tag" content="ca">
 <meta property="article:tag" content="根证书">
@@ -202,7 +202,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2021-11-07 21:42:55" itemprop="dateModified" datetime="2021-11-07T21:42:55+08:00">2021-11-07</time>
+                <time title="Modified: 2021-11-07 21:58:04" itemprop="dateModified" datetime="2021-11-07T21:58:04+08:00">2021-11-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -257,9 +257,9 @@
 <h4 id="3-2-证书部署"><a href="#3-2-证书部署" class="headerlink" title="3.2 证书部署"></a>3.2 证书部署</h4><p>由于我们是自签名的证书，所以需要pc信任根证书，将ca-chain.cert.pem文件分发给需要的pc，导入即可（windows可能需要将改文件拆分成跟证书和中间证书两个crt为扩展名的文件才可以）</p>
 <p>nginx的ssl配置中 会有两行跟证书和秘钥相关的：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ssl\_certificate     /your\_nginx\_conf\_dir/www.example.com.cert.pem;</span><br><span class="line"></span><br><span class="line">ssl\_certificate\_key /your\_nginx\_conf_dir/www.example.com.nopass.key;</span><br><span class="line"></span><br><span class="line">ssl\_certificate很容易，就是上一步生成的证书文件，ssl\_certificate_key是证书的私钥，这里建议导出一份不需要密码短语的私钥，以方便nginx的维护，否则每次nginx操作都会询问密码短语。</span><br><span class="line"></span><br><span class="line">#导出无须密码短语的私钥</span><br><span class="line">cd /root/ca</span><br><span class="line">#方案1</span><br><span class="line">openssl rsa -in intermediate/private/www.example.com.key.pem -out www.example.com.nopass.key</span><br><span class="line">#方案2</span><br><span class="line">openssl x509 -req -in intermediate/csr/www.example.com.csr.pem -CA intermediate/certs/www.example.com.cert.pem \</span><br><span class="line">-CAkey intermediate/private/www.example.com.key.pem -CAcreateserial -out www.example.com.nopass.key</span><br></pre></td></tr></table></figure>
-<h4 id="3-3-多域名证书"><a href="#3-3-多域名证书" class="headerlink" title="3.3 多域名证书"></a>3.3 多域名证书</h4><p>一般来讲，证书的Common Name部分就是域名，可以写<a target="_blank" rel="noopener" href="http://www.example.com或者*.example.com">www.example.com或者*.example.com</a> 但是如果你有多个不同域名，这里就没办法解决了。看到下taobao的https证书，他使用了使用者备用名称（DNS）来解决这个问题的。<br>同样加上操作方式，在本文第三步的基础上修改。<br><strong>a.**</strong>首先编辑 intermediate/intermediate-ca.cnf**</p>
+<h4 id="3-3-多域名证书"><a href="#3-3-多域名证书" class="headerlink" title="3.3 多域名证书"></a>3.3 多域名证书</h4><p>一般来讲，证书的Common Name部分就是域名，可以写<a target="_blank" rel="noopener" href="http://www.example.com或者*.example.com">www.example.com或者*.example.com</a> 但是如果你有多个不同域名，这里就没办法解决了。看到下taobao的https证书，他使用了使用者备用名称（DNS）来解决这个问题的。<br>同样加上操作方式，在本文第三步的基础上修改。<br><strong>a.首先编辑 intermediate/intermediate-ca.cnf</strong></p>
 <p>将 req 部分改为如下两行</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ req ]</span><br><span class="line">distinguished\_name = req\_distinguished_name</span><br><span class="line">req\_extensions = v3\_req</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ req ]</span><br><span class="line">distinguished_name = req_distinguished_name</span><br><span class="line">req_extensions = v3_req</span><br></pre></td></tr></table></figure>
 <p><strong>b. 确保req_distinguished_name下没有 0.xxx 的标签</strong>，有的话把0.xxx的0. 去掉 最后新增</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"> subjectAltName = @alt_names</span><br><span class="line">``</span><br><span class="line">**c. 增加 v3_req 部分**</span><br></pre></td></tr></table></figure>
 <p>[ v3_req ]</p>

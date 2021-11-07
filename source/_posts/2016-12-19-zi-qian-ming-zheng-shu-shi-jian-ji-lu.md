@@ -253,7 +253,7 @@ req_extensions = v3_req
 **b. 确保req_distinguished_name下没有 0.xxx 的标签**，有的话把0.xxx的0. 去掉 最后新增
 ```
  subjectAltName = @alt_names
-``
+```
 **c. 增加 v3_req 部分**
 ```
 [ v3_req ]

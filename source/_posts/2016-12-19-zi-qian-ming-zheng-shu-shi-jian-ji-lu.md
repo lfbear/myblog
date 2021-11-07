@@ -242,15 +242,15 @@ openssl x509 -req -in intermediate/csr/www.example.com.csr.pem -CA intermediate/
 
 一般来讲，证书的Common Name部分就是域名，可以写www.example.com或者*.example.com 但是如果你有多个不同域名，这里就没办法解决了。看到下taobao的https证书，他使用了使用者备用名称（DNS）来解决这个问题的。  
 同样加上操作方式，在本文第三步的基础上修改。  
-**a.****首先编辑 intermediate/intermediate-ca.cnf**
+**a.首先编辑 intermediate/intermediate-ca.cnf**
 
 将 req 部分改为如下两行
 ```
 [ req ]
-distinguished\_name = req\_distinguished_name
-req\_extensions = v3\_req
+distinguished_name = req_distinguished_name
+req_extensions = v3_req
 ```
-**b. 确保req\_distinguished\_name下没有 0.xxx 的标签**，有的话把0.xxx的0. 去掉 最后新增
+**b. 确保req_distinguished_name下没有 0.xxx 的标签**，有的话把0.xxx的0. 去掉 最后新增
 ```
  subjectAltName = @alt_names
 ``

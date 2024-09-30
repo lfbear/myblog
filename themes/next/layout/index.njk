@@ -8,7 +8,7 @@
 {% block content %}
 
   {%- for post in page.posts.toArray() %}
-    {%- if true or post.lang==page.lang %}
+    {%- if post.lang==page.lang %}
       {{ partial('_macro/post.njk', {post: post, is_index: true}) }}
     {%- endif%}
 

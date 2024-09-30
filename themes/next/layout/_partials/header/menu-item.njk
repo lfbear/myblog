@@ -21,6 +21,10 @@
       {%- endfor %}
     {%- endif %}
 
+    {% if page.lang !=='zh-CN' %}
+        {%- set itemURL= page.lang + itemURL%}
+    {%- endif%}
+
     {{- next_url(itemURL, menuIcon + menuText + menuBadge, {rel: 'section'}) -}}
 
   </li>

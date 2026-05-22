@@ -13,6 +13,7 @@ lang: zh-CN
 本文将为你完整梳理从旧主机（华硕 AP201 冰立方）迁移升级至新主机（联力 217 垂直风道）的全过程，并附带一份极具实战价值的**“硬核踩坑与避坑指南”**。
 
 ---
+<!--more-->
 
 ## 🏗️ 算力升级：新旧配置演进
 
@@ -55,7 +56,10 @@ lang: zh-CN
 ### 阶段四：BIOS 解禁
 将显示器线插在最上方的耕升显卡尾部。开机按 `Del` 进入 BIOS：
 * 点击左上角 **XMP** 按钮一键解锁内存高频。
-* 按 `F7` 进入高级模式 $ightarrow$ `Settings` $ightarrow$ `Advanced` $ightarrow$ `PCIe/PCI Subsystem Settings`。将 **`Above 4G Decoding`** 与 **`Re-size BAR Support`** 全部修改为 **[Enabled / 开启]**。
+* 按 `F7` 进入高级模式 $
+ightarrow$ `Settings` $
+ightarrow$ `Advanced` $
+ightarrow$ `PCIe/PCI Subsystem Settings`。将 **`Above 4G Decoding`** 与 **`Re-size BAR Support`** 全部修改为 **[Enabled / 开启]**。
 
 ---
 
@@ -87,8 +91,13 @@ lang: zh-CN
 
 #### 坑位 6：无头 AI 工作站闲置一段时间后彻底失联、Ping 不通
 * **解法（三管齐下）**：
-  * 设备管理器 $ightarrow$ 网卡属性 $ightarrow$ 【电源管理】中**取消勾选**“允许计算机关闭此设备以节约电源”。
-  * 电源选项 $ightarrow$ 高级电源设置 $ightarrow$ 【PCI Express】 $ightarrow$ **【链路状态电源管理】修改为【关闭】**。
+  * 设备管理器 $
+ightarrow$ 网卡属性 $
+ightarrow$ 【电源管理】中**取消勾选**“允许计算机关闭此设备以节约电源”。
+  * 电源选项 $
+ightarrow$ 高级电源设置 $
+ightarrow$ 【PCI Express】 $
+ightarrow$ **【链路状态电源管理】修改为【关闭】**。
   * 将“关闭显示器”的时间修改为【从不】。
 
 #### 坑位 7：利用 TrueNAS 服务器远程唤醒假死网卡时，只知道 IP 不知道 MAC

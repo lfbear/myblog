@@ -1,7 +1,7 @@
 ---
 title: DIY主机升级：打造家庭私有化AI算力小钢炮
 date: 2026-05-22 03:31:39
-tags: [AI, GPU, DIY, Workstation, Hexo]
+tags: [AI, GPU, DIY, Workstation]
 categories: [Tech]
 lang: zh-CN
 ---

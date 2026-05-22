@@ -1,5 +1,5 @@
 ---
-title: DIY Workstation Upgrade: Building a Home-Hosted Private AI Powerhouse
+title: "DIY Workstation Upgrade: Building a Home-Hosted Private AI Powerhouse"
 date: 2026-05-22 03:31:39
 tags: [AI, GPU, DIY, Workstation]
 categories: [Tech]

@@ -1,7 +1,7 @@
 ---
 title: DIY Workstation Upgrade: Building a Home-Hosted Private AI Powerhouse
 date: 2026-05-22 03:31:39
-tags: [AI, GPU, DIY, Workstation, Hexo]
+tags: [AI, GPU, DIY, Workstation]
 categories: [Tech]
 lang: en
 ---
@@ -13,6 +13,7 @@ With the explosion of local Large Language Models (LLMs) and multimodal AI archi
 This post outlines the entire lifecycle of migrating and upgrading an existing rig from an ASUS AP201 Prime Case to a Lian Li 217 vertical airflow chassis, topped off with a battle-tested **"Hardcore Gotchas & Troubleshooting Guide."**
 
 ---
+<!--more-->
 
 ## 🏗️ Compute Upgrade: Hardware Evolution
 
@@ -55,7 +56,10 @@ The underlying architectural thesis of this build is simple: retain the highly c
 ### Phase 4: Low-Level Motherboard Optimization
 Connect the monitor's DP/HDMI cable directly to the output array of the primary Gainward card. Smash the `Del` key on boot to enter the Click BIOS 5 environment:
 * Toggle the **XMP** profile icon to instantly lift your memory out of its JEDEC baseline up to its 6000MT/s rating.
-* Navigate to `Advanced (F7)` $ightarrow$ `Settings` $ightarrow$ `Advanced` $ightarrow$ `PCIe/PCI Subsystem Settings`. Explicitly flag **`Above 4G Decoding`** and **`Re-size BAR Support`** as **[Enabled]**.
+* Navigate to `Advanced (F7)` $
+ightarrow$ `Settings` $
+ightarrow$ `Advanced` $
+ightarrow$ `PCIe/PCI Subsystem Settings`. Explicitly flag **`Above 4G Decoding`** and **`Re-size BAR Support`** as **[Enabled]**.
 
 ---
 
@@ -89,8 +93,15 @@ Connect the monitor's DP/HDMI cable directly to the output array of the primary 
 #### Gotcha 6: Headless Computations Drop Offline Post Idle Intervals
 * **Symptom**: The AI server goes completely dark after sitting idle. Remote Desktop (RDP) connection requests drop, and the host ceases to respond to standard ICMP `ping` sweeps.
 * **Resolution**:
-  * Launch Device Manager $ightarrow$ Network Adapters $ightarrow$ Properties $ightarrow$ Power Management. **Uncheck** "Allow the computer to turn off this device to save power."
-  * Navigate to Control Panel $ightarrow$ Power Options $ightarrow$ Change Advanced Power Settings $ightarrow$ **[PCI Express]** $ightarrow$ Set **[Link State Power Management] to [Off]**.
+  * Launch Device Manager $
+ightarrow$ Network Adapters $
+ightarrow$ Properties $
+ightarrow$ Power Management. **Uncheck** "Allow the computer to turn off this device to save power."
+  * Navigate to Control Panel $
+ightarrow$ Power Options $
+ightarrow$ Change Advanced Power Settings $
+ightarrow$ **[PCI Express]** $
+ightarrow$ Set **[Link State Power Management] to [Off]**.
   * Enforce display timeout settings to "Never," or inject a registry token named `PlatformAoAcOverride` (DWORD set to 0) to permanently decommission Modern Standby behavior.
 
 #### Gotcha 7: Remote Triggering Wake-on-LAN via TrueNAS Without Stored MAC Addresses
